@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 const Counter = () => {
-  const toggleCounterHandler = () => { };
+  const toggleCounterHandler = () => {
+    dispatch({ type: 'TOGGLE' })
+  };
 
-  const { count } = useSelector((storeVal) => storeVal);
+  const { count, isToggled } = useSelector((storeVal) => storeVal);
   const dispatch = useDispatch();
 
   const buttonStyle = {
@@ -13,15 +15,16 @@ const Counter = () => {
   }
 
   const haddleIncrementDecrement = (actionType = '') => {
+    console.log(actionType);
     dispatch({ type: actionType, payload: 1 })
   }
   return (
     <main className={classes.counter}>
       <h1>Redux Counter</h1>
-      <div className={classes.value}>{count} </div>
+      {!isToggled && <div className={classes.value}>{count} </div>}
       <button onClick={toggleCounterHandler}>Toggle Counter</button>
 
-      <button style={buttonStyle} > Decrement </button>
+      <button onClick={haddleIncrementDecrement.bind(null, 'DECREMEMT')} style={buttonStyle} > Decrement </button>
       <button onClick={() => haddleIncrementDecrement('INCREMENT')} style={buttonStyle}> Increment </button>
     </main>
   );

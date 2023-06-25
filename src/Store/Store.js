@@ -13,6 +13,16 @@ export const myStoreReducer = (state = { ...initialState }, action) => {
                 ...state,
                 count: state.count + action.payload
             }
+        case 'DECREMEMT':
+            return {
+                ...state,
+                count: state.count - action.payload
+            }
+        case 'TOGGLE':
+            return {
+                ...state,
+                isToggled: !state.isToggled
+            }
 
         default:
             return state;
