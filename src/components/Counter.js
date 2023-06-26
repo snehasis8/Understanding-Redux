@@ -1,13 +1,17 @@
 import classes from './Counter.module.css';
 import { useDispatch, useSelector } from 'react-redux';
+import { counterActions } from '../Store/Store';
+
+
 
 
 const Counter = () => {
+  const { decrement, increment, toggle } = counterActions
   const toggleCounterHandler = () => {
-    dispatch({ type: 'TOGGLE' })
+    dispatch(toggle())
   };
 
-  const { count, isToggled } = useSelector((storeVal) => storeVal);
+  const { count, isToggled } = useSelector((storeVal) => storeVal.counter);
   const dispatch = useDispatch();
 
   const buttonStyle = {
@@ -15,8 +19,12 @@ const Counter = () => {
   }
 
   const haddleIncrementDecrement = (actionType = '') => {
-    console.log(actionType);
-    dispatch({ type: actionType, payload: 1 })
+    if (actionType === 'INCREMENT') {
+      dispatch(increment(1))
+    } else {
+      dispatch(decrement(1))
+    }
+
   }
   return (
     <main className={classes.counter}>
