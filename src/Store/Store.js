@@ -20,6 +20,12 @@ const counterSlice = createSlice({
         toggle(state) {
             state.isToggled = !state.isToggled
         }
+    },
+    extraReducers: (builder) => {  // here basically I am listing to the other slilce of action and act on taht 
+        builder.addCase(authSlice.actions.logOut, (state, __actions) => {
+            state.count = 0;
+            state.isToggled = true
+        })
     }
 })
 

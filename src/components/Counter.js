@@ -7,11 +7,15 @@ import { counterActions } from '../Store/Store';
 
 const Counter = () => {
   const { decrement, increment, toggle } = counterActions
+
+
   const toggleCounterHandler = () => {
     dispatch(toggle())
   };
 
   const { count, isToggled } = useSelector((storeVal) => storeVal.counter);
+  const storeVal = useSelector((state) => state)
+  console.log(storeVal);
   const dispatch = useDispatch();
 
   const buttonStyle = {
